@@ -20,7 +20,7 @@ double Meshdx = 0.0;
 double Meshdy = 0.0;
 double dt = 0.0;
 
-std::vector<std::vector<int>> ICon;  // Connectivity array, assuming 4 nodes per element
+std::vector<std::array<int, 4>> ICon;  // Connectivity array, assuming 4 nodes per element
 
 std::vector<double> GrvF;  // Gravity Force at each node
 std::vector<double> InrF;  // Internal Force at each node

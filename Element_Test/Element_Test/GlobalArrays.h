@@ -27,7 +27,7 @@ extern double Meshdx;
 extern double Meshdy;
 extern double dt;
 
-extern std::vector<std::vector<int>> ICon;  // Connectivity array, assuming 4 nodes per element
+extern std::vector<std::array<int, 4>> ICon;  // Connectivity array, assuming 4 nodes per element
 
 extern std::vector<double> GrvF;  // Gravity Force at each node
 extern std::vector<double> InrF;  // Internal Force at each node

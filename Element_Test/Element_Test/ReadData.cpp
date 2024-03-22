@@ -7,6 +7,9 @@
 #include <vector>
 
 void readData() {
+
+    int i = 0;
+
     std::ifstream inputFile("input.dat");
     if (!inputFile.is_open()) {
         std::cerr << "Failed to open input.dat" << std::endl;
@@ -22,7 +25,7 @@ void readData() {
     NEl = NDivX * NDivY;
 
     NodCo.resize(NNod);
-    ICon.resize(NEl, std::vector<int>(4)); // Resize ICon for NEl elements, each with 4 nodes
+    ICon.resize(NEl); // Resize ICon for NEl elements, each with 4 nodes
     IsFixDof.resize(2 * NNod);
     Mas.resize(2 * NNod, 0.0);
     GrvF.resize(2 * NNod, 0.0);
@@ -35,16 +38,15 @@ void readData() {
     // Initialize other arrays similarly...
 
     // Loop to read node coordinates
-    for (int i = 0; i < NNod; ++i) {
-        inputFile >> temp >> NodCo[i][0] >> NodCo[i][1] >> temp;
+    for (i = 0; i < NNod; ++i) {
+        inputFile >> temp >> NodCo[0][i] >> NodCo[1][i] >> temp;
+        std::cout << NodCo[0][i] << NodCo[1][i];
     }
-
+    
     // Loop to read connectivity
-    for (int i = 0; i < NEl; ++i) {
-        inputFile >> temp;
-        for (int j = 0; j < 4; ++j) {
-            inputFile >> ICon[i][j];
-        }
+    for (i = 0; i < NEl; ++i) {
+                 inputFile >> temp >> ICon[0][i] >> ICon[1][i] >> ICon[2][i] >> ICon[3][i];
+                 std::cout << temp << ICon[0][i] << ICon[1][i] << ICon[2][i] << ICon[3][i];
     }
 
     // Reading material properties
@@ -54,7 +56,7 @@ void readData() {
 
     inputFile >> gx >> gy >> ndtn >> dt;
 
-    for (int i = 0; i < NNod; ++i) {
+    for (i = 0; i < NNod; ++i) {
         // If the y-coordinate of the node is 0
         if (NodCo[i][1] == 0.0) {
             IsFixDof[2 * i] = true;     // Fix x DoF
